@@ -1,0 +1,33 @@
+/* App.css */
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Define 5 columns */
+  grid-template-rows: repeat(3, 1fr); /* Define 3 rows */
+
+  gap: 16px; /* Adjust gap between images as needed */
+}
+
+.image-container {
+  border: 1px solid #ccc;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Define the grid positions for the first image */
+  &:nth-child(1) {
+    grid-row: span 2; /* Occupies 2 rows */
+    grid-column: span 2; /* Occupies 2 columns */
+  }
+}
+
+.image-container img {
+  max-width: 100%;
+  display: block;
+}
+
+.gallery-container {
+  margin: 0 20px; /* Add space on both the left and right sides */
+  padding: 20px; /* Add padding to the container if needed */
+}
