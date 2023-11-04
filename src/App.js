@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import React, { useState } from "react";
+import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
-import './App.css'; // Import your CSS file for styling
+import "./App.css"; 
 
 const Image = ({ image, index, moveImage, isSelected, toggleSelection }) => {
   const [, ref] = useDrag({
-    type: 'IMAGE',
+    type: "IMAGE",
     item: { index },
   });
 
   const [, drop] = useDrop({
-    accept: 'IMAGE',
+    accept: "IMAGE",
     hover: (draggedImage) => {
       if (draggedImage.index !== index) {
         moveImage(draggedImage.index, index);
@@ -21,9 +21,18 @@ const Image = ({ image, index, moveImage, isSelected, toggleSelection }) => {
   });
 
   return (
-    <div ref={(node) => ref(drop(node))} className={`image-container ${isSelected ? 'selected' : ''}`}>
-      <input type="checkbox" id={`checkbox-${index}`} checked={isSelected} onChange={() => toggleSelection(index)} />
-      <label htmlFor={`checkbox-${index}`}>
+    <div
+      ref={(node) => ref(drop(node))}
+      className={`image-container ${isSelected ? "selected" : ""}`}
+    >
+      <label htmlFor={`checkbox-${index}`} className="image-label">
+        <input
+          type="checkbox"
+          id={`checkbox-${index}`}
+          checked={isSelected}
+          onChange={() => toggleSelection(index)}
+        />
+        <div className="checkmark"></div>
         <img src={image} alt={`Image ${index}`} />
       </label>
     </div>
@@ -32,29 +41,29 @@ const Image = ({ image, index, moveImage, isSelected, toggleSelection }) => {
 
 const App = () => {
   const initialImages = [
-    '/images/image-1.webp',
-    '/images/image-2.webp',
-    '/images/image-3.webp',
-    '/images/image-4.webp',
-    '/images/image-5.webp',
-    '/images/image-6.webp',
-    '/images/image-7.webp',
-    '/images/image-8.webp',
-    '/images/image-9.webp',
-    '/images/image-10.jpeg',
-    '/images/image-11.jpeg',
+    "/images/image-1.webp",
+    "/images/image-2.webp",
+    "/images/image-3.webp",
+    "/images/image-4.webp",
+    "/images/image-5.webp",
+    "/images/image-6.webp",
+    "/images/image-7.webp",
+    "/images/image-8.webp",
+    "/images/image-9.webp",
+    "/images/image-10.jpeg",
+    "/images/image-11.jpeg",
   ];
 
   const [images, setImages] = useState(initialImages);
   const [selectedImages, setSelectedImages] = useState([]);
-  
+
   const moveImage = (fromIndex, toIndex) => {
     const updatedImages = [...images];
     const [movedImage] = updatedImages.splice(fromIndex, 1);
     updatedImages.splice(toIndex, 0, movedImage);
     setImages(updatedImages);
   };
-  
+
   const toggleSelection = (index) => {
     if (selectedImages.includes(index)) {
       setSelectedImages(selectedImages.filter((item) => item !== index));
@@ -64,7 +73,9 @@ const App = () => {
   };
 
   const deleteSelectedImages = () => {
-    const updatedImages = images.filter((_, index) => !selectedImages.includes(index));
+    const updatedImages = images.filter(
+      (_, index) => !selectedImages.includes(index)
+    );
     setImages(updatedImages);
     setSelectedImages([]); // Clear selectedImages after deletion
   };
@@ -75,12 +86,14 @@ const App = () => {
         <h1>
           {selectedImages.length > 0
             ? `${selectedImages.length} Files Selected`
-            : 'Gallery'
-          }
+            : "Gallery"}
+        
         </h1>
         {selectedImages.length > 0 && (
-          <button className="delete-button" onClick={deleteSelectedImages}>Delete files</button>
-        )}
+            <button className="delete-button" onClick={deleteSelectedImages}>
+              Delete files
+            </button>
+          )}
       </div>
       <DndProvider backend={HTML5Backend}>
         <div className="image-grid">

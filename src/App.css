@@ -1,19 +1,16 @@
-/* App.css */
-
 .image-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* Define 5 columns */
   grid-template-rows: repeat(3, 1fr); /* Define 3 rows */
-
   gap: 16px; /* Adjust gap between images as needed */
 }
 
 .image-container {
   border: 1px solid #ccc;
-  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 10px; /* Add border-radius for rounded corners */
 
   /* Define the grid positions for the first image */
   &:nth-child(1) {
@@ -25,9 +22,75 @@
 .image-container img {
   max-width: 100%;
   display: block;
+  border-radius: 10px; /* Add border-radius for the image as well */
 }
 
 .gallery-container {
   margin: 0 20px; /* Add space on both the left and right sides */
   padding: 20px; /* Add padding to the container if needed */
+}
+
+
+.image-label input[type="checkbox"] {
+
+}
+
+/* Style the label to overlay the image and show checkbox on hover */
+
+/* Style the label to overlay the image and show checkbox on hover */
+.image-label {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the checkbox label */
+.image-label input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px; /* Adjust the width as needed */
+  height: 30px; /* Adjust the height as needed */
+  transform: translate(0, 0);
+  opacity: 0; /* Initially hide the checkbox */
+  cursor: pointer; /* Add a pointer cursor to indicate it's clickable */
+}
+
+/* Show the checkbox on hover */
+.image-label:hover input[type="checkbox"] {
+  opacity: 1;
+}
+
+/* Style the checkmark inside the label */
+.image-label .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 24px; /* Adjust the size of the checkmark as needed */
+  color: green; /* Adjust the color of the checkmark as needed */
+  display: none; /* Initially hide the checkmark */
+}
+
+/* Show the checkmark when the checkbox is checked */
+.image-label input[type="checkbox"]:checked + .checkmark {
+  display: block;
+}
+
+/* Style for the header */
+.header {
+  display: flex;
+  justify-content: space-between; /* Align items to the right end of the header */
+  align-items: center;
+}
+
+.delete-button {
+  background-color: #ff0000; /* Background color for the button */
+  color: #fff; /* Text color */
+  padding: 10px 20px; /* Padding to increase the button's clickable area */
+  border: none; /* Remove the default button border */
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.delete-button:hover {
+  background-color: #cc0000; /* Change background color on hover */
 }
